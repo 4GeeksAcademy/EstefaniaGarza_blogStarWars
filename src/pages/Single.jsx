@@ -7,18 +7,18 @@ export const Single = () => {
 
   const getImageUrl = () => {
     if (type === "people") {
-      return `https://starwars-visualguide.com/assets/img/characters/${uid}.jpg`;
+      return "https://placehold.co/800x600/222/FFE81F?text=Character";
     }
 
     if (type === "planets") {
-      return `https://starwars-visualguide.com/assets/img/planets/${uid}.jpg`;
+      return "https://placehold.co/800x600/1b4965/ffffff?text=Planet";
     }
 
     if (type === "vehicles") {
-      return `https://starwars-visualguide.com/assets/img/vehicles/${uid}.jpg`;
+      return "https://placehold.co/800x600/333533/ffffff?text=Vehicle";
     }
 
-    return "";
+    return "https://placehold.co/800x600?text=Star+Wars";
   };
 
   const getDetails = async () => {
@@ -46,6 +46,51 @@ export const Single = () => {
 
   const properties = item.properties;
 
+  const getVisibleProperties = () => {
+    if (!properties) return [];
+
+    if (type === "people") {
+      return [
+        ["Name", properties.name],
+        ["Gender", properties.gender],
+        ["Birth Year", properties.birth_year],
+        ["Height", properties.height],
+        ["Mass", properties.mass],
+        ["Hair Color", properties.hair_color],
+        ["Skin Color", properties.skin_color],
+        ["Eye Color", properties.eye_color]
+      ];
+    }
+
+    if (type === "planets") {
+      return [
+        ["Name", properties.name],
+        ["Climate", properties.climate],
+        ["Terrain", properties.terrain],
+        ["Population", properties.population],
+        ["Diameter", properties.diameter],
+        ["Gravity", properties.gravity],
+        ["Orbital Period", properties.orbital_period],
+        ["Rotation Period", properties.rotation_period]
+      ];
+    }
+
+    if (type === "vehicles") {
+      return [
+        ["Name", properties.name],
+        ["Model", properties.model],
+        ["Manufacturer", properties.manufacturer],
+        ["Cost", properties.cost_in_credits],
+        ["Length", properties.length],
+        ["Crew", properties.crew],
+        ["Passengers", properties.passengers],
+        ["Vehicle Class", properties.vehicle_class]
+      ];
+    }
+
+    return [];
+  };
+
   return (
     <div className="container mt-5">
       <div className="row align-items-center">
@@ -72,16 +117,12 @@ export const Single = () => {
       <hr className="my-4 text-danger" />
 
       <div className="row text-danger text-center">
-        {Object.entries(properties)
-          .filter(([key]) => key !== "created" && key !== "edited" && key !== "url")
-          .map(([key, value]) => (
-            <div className="col-md-2 mb-3" key={key}>
-              <strong className="text-capitalize">
-                {key.replaceAll("_", " ")}
-              </strong>
-              <p>{value}</p>
-            </div>
-          ))}
+        {getVisibleProperties().map(([label, value]) => (
+          <div className="col-md-3 mb-4" key={label}>
+            <strong>{label}</strong>
+            <p className="mb-0">{value}</p>
+          </div>
+        ))}
       </div>
 
       <Link to="/">

@@ -10,15 +10,15 @@ export const StarWarsCard = ({ item, type }) => {
 
     const getImageUrl = () => {
         if (type === "people") {
-            return `https://starwars-visualguide.com/assets/img/characters/${item.uid}.jpg`;
+            return "https://placehold.co/400x300/222/FFE81F?text=Character";
         }
 
         if (type === "planets") {
-            return `https://starwars-visualguide.com/assets/img/planets/${item.uid}.jpg`;
+            return "https://placehold.co/400x300/1b4965/ffffff?text=Planet";
         }
 
         if (type === "vehicles") {
-            return `https://starwars-visualguide.com/assets/img/vehicles/${item.uid}.jpg`;
+            return "https://placehold.co/400x300/333533/ffffff?text=Vehicle";
         }
 
         return "https://placehold.co/400x300?text=Star+Wars";
